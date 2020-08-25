@@ -32,8 +32,10 @@ public class RetrievePremiumsController {
     @GetMapping("/getPremiumDetails/{policy_number}")
     public ResponseEntity<GetPremiumResponse> getPremiumDetails(@PathVariable(value = "policy_number") String policy_number) {
 
+        logger.info("controller start");
         if (policy_number != null) {
             getPremiumResponse = retrievePremiums(policy_number);
+            logger.info("controller end");
             return new ResponseEntity<GetPremiumResponse>(getPremiumResponse, HttpStatus.OK);
         } else {
             return new ResponseEntity<GetPremiumResponse>(HttpStatus.INTERNAL_SERVER_ERROR);

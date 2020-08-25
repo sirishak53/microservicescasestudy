@@ -1,5 +1,7 @@
 package com.SMTP.SMTP;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -19,13 +21,15 @@ public class SmtpApplication implements CommandLineRunner {
 	@Autowired
 	private JavaMailSender javaMailSender;
 
+	private static final Logger logger = LoggerFactory.getLogger(SmtpApplication.class);
+
 	public static void main(String[] args) {
 		SpringApplication.run(SmtpApplication.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("Sending email...");
+		logger.info("Sending email...");
 
 		sendEmail();
 	}
@@ -39,12 +43,5 @@ public class SmtpApplication implements CommandLineRunner {
 
 		javaMailSender.send(simpleMailMessage);
 	}
-//	void SendEmailWithAttachement() throws MessagingException, IOException {
-//		MimeMessage SimpleMailMesaage= (MimeMessage) JavaMailSender.createMimeMessage();
-//		MimeMessageHelper helper=new MimeMessageHelper(SimpleMailMesaage,true);
-//		helper.setTo(("saisirisha0304@gmail.com"));
-//		helper.setSubject("Testing from springboot");
-//		helper.setText("<h1>check attachment for image!</h1>",true);
-//		helper.addAttachment("my_photo.png",new ClassPathResource("android.png"));
-//	}
+
 }
